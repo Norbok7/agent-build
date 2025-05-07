@@ -1,0 +1,10 @@
+<% is_new = list.custom_url.blank? %>
+<%= form_with url: is_new ? lists_path : list_path(list.custom_url), method: is_new ? :post : :patch, local: true, html: { class: 'form-group' } do |f| %>
+  <div class="form-group">
+    <%= f.label :custom_url, 'Custom URL (optional)' %>
+    <%= f.text_field :custom_url, value: list.custom_url %>
+  </div>
+  <div>
+    <%= f.submit is_new ? 'Create List' : 'Update List', class: 'button' %>
+  </div>
+<% end %>

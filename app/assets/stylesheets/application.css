@@ -1,0 +1,174 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+/* Modern, professional UI for The Urlist */
+:root {
+  --color-bg: #f8fafc;
+  --color-surface: #fff;
+  --color-primary: #2563eb;
+  --color-primary-dark: #1e40af;
+  --color-accent: #f59e42;
+  --color-danger: #dc2626;
+  --color-text: #1e293b;
+  --color-muted: #64748b;
+  --radius: 0.75rem;
+  --shadow: 0 2px 8px rgba(30,41,59,0.07);
+  --font-main: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.container {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+}
+
+ul {
+  padding-left: 1.2em;
+}
+
+.button, .btn {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.5em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.15s;
+}
+.button:hover, .btn:hover {
+  background: var(--color-primary-dark);
+}
+.button:active, .btn:active {
+  transform: scale(0.97);
+}
+
+.form-group {
+  margin-bottom: 1.2em;
+}
+input[type="text"], input[type="url"], input[type="password"], textarea {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid var(--color-muted);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  margin-top: 0.2em;
+  box-sizing: border-box;
+}
+
+.flash-messages {
+  margin-bottom: 1.5em;
+}
+.flash {
+  padding: 0.75em 1em;
+  border-radius: var(--radius);
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  animation: fade-in 0.5s;
+}
+.flash.notice { background: #e0f2fe; color: var(--color-primary-dark); }
+.flash.alert { background: #fee2e2; color: var(--color-danger); }
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+.list-item:last-child { border-bottom: none; }
+
+.url-actions {
+  display: flex;
+  gap: 0.5em;
+}
+
+.copy-link {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.3em 0.8em;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-left: 0.5em;
+  transition: background 0.15s, transform 0.15s;
+}
+.copy-link:hover {
+  background: #ea580c;
+}
+.copy-link:active {
+  transform: scale(0.97);
+}
+
+#edit-url-modal {
+  transition: opacity 0.3s;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+  padding: 2em;
+  border-radius: var(--radius);
+}
+#edit-url-modal[open], #edit-url-modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #181f2a;
+    --color-surface: #232b3a;
+    --color-primary: #60a5fa;
+    --color-primary-dark: #2563eb;
+    --color-accent: #fbbf24;
+    --color-danger: #f87171;
+    --color-text: #f1f5f9;
+    --color-muted: #64748b;
+    --shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  body {
+    color-scheme: dark;
+  }
+}
+
+@media (max-width: 800px) {
+  .container { padding: 1rem; }
+}

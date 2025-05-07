@@ -1,0 +1,45 @@
+<div class="container">
+  <h1>List: <%= @list.custom_url %></h1>
+  <div style="margin-bottom: 1em;">
+    <%= link_to 'Back to Lists', lists_path, class: 'btn' %>
+    <%= link_to 'Edit List', edit_list_path(@list.custom_url), class: 'btn' %>
+    <%= link_to 'Delete List', list_path(@list.custom_url), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn', style: 'background: var(--color-danger);' %>
+    <button class="copy-link" onclick="navigator.clipboard.writeText(window.location.href);this.textContent='Copied!';setTimeout(()=>this.textContent='Copy Link',1200)">Copy Link</button>
+  </div>
+  <h2>URLs</h2>
+  <ul>
+    <% @list.urls.each do |url| %>
+      <li class="list-item">
+        <span><%= url[:url] %></span>
+        <span class="url-actions">
+          <%= link_to 'Edit', '#', data: { url_id: url[:id], url: url[:url] }, class: 'btn edit-url-link' %>
+          <%= link_to 'Delete', delete_url_list_path(@list.custom_url, url_id: url[:id]), method: :delete, data: { confirm: 'Delete this URL?' }, class: 'btn', style: 'background: var(--color-danger);' %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+  <h3>Add a URL</h3>
+  <%= form_with url: add_url_list_path(@list.custom_url), method: :post, local: true, html: { class: 'form-group' } do |f| %>
+    <%= f.text_field :url, placeholder: 'Paste URL here' %>
+    <%= f.submit 'Add URL', class: 'button' %>
+  <% end %>
+  <div id="edit-url-modal" style="display:none;">
+    <%= form_with url: edit_url_list_path(@list.custom_url), method: :patch, local: true, id: 'edit-url-form', html: { class: 'form-group' } do |f| %>
+      <%= f.hidden_field :url_id, id: 'edit-url-id' %>
+      <%= f.text_field :new_url, id: 'edit-url-input' %>
+      <%= f.submit 'Update URL', class: 'button' %>
+    <% end %>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.edit-url-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('edit-url-modal').style.display = 'block';
+          document.getElementById('edit-url-id').value = link.dataset.urlId;
+          document.getElementById('edit-url-input').value = link.dataset.url;
+        });
+      });
+    });
+  </script>
+</div>

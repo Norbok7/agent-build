@@ -1,0 +1,5 @@
+<div class="container">
+  <h1>Edit List</h1>
+  <%= render 'form', list: @list %>
+  <%= link_to 'Back', list_path(@list.custom_url), class: 'btn' %>
+</div>
